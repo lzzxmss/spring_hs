@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript">
+         $(function () {
+              $.post("/estate/list",function (f) {
+                  $.each(f,function (i,e) {
+                        $("#q").append("<option value='"+e.eid+"'>"+e.ename+"</option>");
+                  })
+              })
+         })
+    </script>
+</head>
+<body>
+<form action="/house/save" method="post" enctype="multipart/form-data">
+  <p>
+      标题:<input type="text" name="hTitle"/>
+  </p>
+    <p>
+        价格:<input type="text" name="hPrice"/>
+    </p>
+    <p>
+        图片:<input type="file" name="photo"/>
+    </p>
+    <p>
+        小区:
+        <select name="hEstate" id="q">
+
+        </select>
+    </p>
+    <p>
+       <input type="submit" value="提交"/>
+    </p>
+</form>
+
+
+</body>
+</html>

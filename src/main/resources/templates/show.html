@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript">
+         function gm(id) {
+              $.post("/house/edit",{hid:id},function (f) {
+                   if(f>0){
+                       $("#p"+id).html("已售");
+                   }
+              })
+         }
+    </script>
+</head>
+<body>
+
+<a href="/save">添加房屋信息</a>  |  <a href="">查询统计</a>
+<hr/>
+<div style="width: 1200px;border: 1px solid">
+   <div th:each="h : ${list}"  style="width: 200px;height: 300px;border: 2px red solid;margin-left: 20px;float: left">
+       <h3 th:text="${h.hTitle}"></h3>
+       <img th:src="${h.hImage}" width="150px">
+       <h3><span th:text="${h.hPrice}"></span>万</h3>
+       <p th:id="p+${h.hId}">
+           <button th:if="${h.hSell}==0" th:onclick="'gm('+${h.hId}+')'">购买</button>
+           <span th:if="${h.hSell}==1">已售</span>
+       </p>
+   </div>
+</div>
+
+</body>
+</html>
